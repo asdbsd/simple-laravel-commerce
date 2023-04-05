@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/home-layout.css">
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+        </symbol>
+        <symbol id="instagram" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+        </symbol>
+        <symbol id="twitter" viewBox="0 0 16 16">
+          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+        </symbol>
+      </svg>
+
+    <div class="container py-3">
+        <header>
+            <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+                <a href="home-layout.html" class="d-flex align-items-center text-dark text-decoration-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                        width="40" height="32" viewBox="0 0 256 256" xml:space="preserve">
+
+                        <defs>
+                        </defs>
+                        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                            transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                            <path
+                                d="M 79.666 51.755 c 0 -1.794 -1.459 -3.253 -3.253 -3.253 s -3.254 1.459 -3.254 3.253 c 0 1.443 0.951 2.655 2.254 3.079 v 10.169 c 0 5.789 -4.71 10.499 -10.499 10.499 s -10.499 -4.71 -10.499 -10.499 V 54.834 c 1.303 -0.425 2.253 -1.637 2.253 -3.079 c 0 -1.794 -1.459 -3.253 -3.253 -3.253 s -3.254 1.459 -3.254 3.253 c 0 1.443 0.951 2.655 2.254 3.079 v 10.169 c 0 6.892 5.607 12.499 12.499 12.499 s 12.499 -5.607 12.499 -12.499 V 54.834 C 78.716 54.41 79.666 53.198 79.666 51.755 z M 53.415 50.502 c 0.69 0 1.253 0.563 1.253 1.253 s -0.563 1.253 -1.253 1.253 c -0.691 0 -1.254 -0.563 -1.254 -1.253 S 52.724 50.502 53.415 50.502 z M 76.413 53.008 c -0.691 0 -1.254 -0.563 -1.254 -1.253 s 0.563 -1.253 1.254 -1.253 c 0.69 0 1.253 0.563 1.253 1.253 S 77.104 53.008 76.413 53.008 z"
+                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                            <path
+                                d="M 84.737 46.622 c -0.146 -1.585 -1.456 -2.78 -3.048 -2.78 H 63.564 l -1.371 -14.894 c -0.188 -2.03 -1.867 -3.562 -3.906 -3.562 h -6.481 v -8.082 C 51.805 7.763 44.042 0 34.5 0 S 17.195 7.763 17.195 17.305 v 8.082 h -6.482 c -2.039 0 -3.718 1.531 -3.905 3.562 L 1.58 85.719 c -0.101 1.096 0.266 2.189 1.007 3.002 C 3.329 89.534 4.384 90 5.484 90 h 38.966 h 40.926 c 0.858 0 1.683 -0.364 2.262 -0.998 c 0.578 -0.635 0.864 -1.488 0.786 -2.343 L 84.737 46.622 z M 19.195 17.305 C 19.195 8.866 26.061 2 34.5 2 s 15.305 6.866 15.305 15.305 v 8.082 H 19.195 V 17.305 z M 4.065 87.373 c -0.369 -0.403 -0.544 -0.926 -0.494 -1.471 L 8.8 29.131 c 0.092 -0.995 0.915 -1.745 1.914 -1.745 h 6.482 v 4.741 C 15.366 32.578 14 34.221 14 36.188 c 0 2.313 1.882 4.195 4.195 4.195 c 2.313 0 4.195 -1.882 4.195 -4.195 c 0 -1.967 -1.366 -3.61 -3.195 -4.061 v -4.741 h 30.609 v 4.741 c -1.83 0.451 -3.195 2.094 -3.195 4.062 c 0 2.313 1.882 4.195 4.195 4.195 S 55 38.501 55 36.188 c 0 -1.967 -1.366 -3.61 -3.195 -4.062 v -4.741 h 6.481 c 1 0 1.822 0.75 1.914 1.745 l 1.355 14.71 H 48.139 c -1.592 0 -2.901 1.195 -3.047 2.78 l -3.688 40.037 c -0.043 0.46 0.028 0.916 0.186 1.341 H 5.484 C 4.938 88 4.433 87.777 4.065 87.373 z M 18.195 33.993 c 1.21 0 2.195 0.985 2.195 2.195 s -0.984 2.195 -2.195 2.195 S 16 37.399 16 36.188 S 16.985 33.993 18.195 33.993 z M 50.805 33.993 c 1.211 0 2.195 0.985 2.195 2.195 s -0.984 2.195 -2.195 2.195 s -2.195 -0.984 -2.195 -2.195 S 49.594 33.993 50.805 33.993 z M 86.16 87.654 C 85.957 87.877 85.679 88 85.377 88 H 44.451 c -0.302 0 -0.58 -0.123 -0.784 -0.346 c -0.203 -0.224 -0.3 -0.512 -0.272 -0.812 l 3.688 -40.037 c 0.05 -0.55 0.504 -0.964 1.056 -0.964 h 33.551 c 0.552 0 1.006 0.414 1.056 0.964 l 3.688 40.037 C 86.461 87.143 86.364 87.431 86.16 87.654 z"
+                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        </g>
+                    </svg>
+                    <span class="fs-4">LaraCommerce</span>
+                </a>
+
+                <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
+                    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Store</a>
+                    <button class="btn btn-sm btn-outline-primary rounded-2 me-1">Login</button>
+                    <button class="btn btn-sm btn-success rounded-2">Register</button>
+
+                    <div class="dropdown text-end ms-1">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
+                                class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="#">New product...</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+        </header>
+
+        <main>
+            <div class="position-relative overflow-hidden p-3 p-md-5 my-2 text-left product-header">
+                <div class="col-md-5 p-lg-5 my-5">
+                    <h1 class="display-4 fw-normal">Punny headline</h1>
+                    <p class="lead fw-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts
+                        with this example based on Apple’s marketing pages.</p>
+                    <a class="btn btn-outline-secondary" href="#">Go to Store</a>
+                </div>
+
+            </div>
+
+
+            <div class="px-4 pt-5 my-5 text-center border-bottom">
+                <h1 class="display-4 fw-bold">Your Favorite Beverages</h1>
+                <div class="col-lg-12 mx-auto">
+                    <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                        world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
+                        responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Buy Now</button>
+                        <button type="button" class="btn btn-outline-danger btn-lg px-4">Go to Favorites</button>
+                    </div>
+                </div>
+                <div class="overflow-hidden" style="max-height: 30vh;">
+                    <div class="container px-5">
+                        <img src="./images/beverages.jpg" class="img-fluid border rounded-3 shadow-lg mb-4"
+                            alt="Example image" width="700" height="500" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-12 px-4 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5 border-bottom rounded-4">
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        <img src="./images/meat.jpeg" class="d-block mx-lg-auto img-fluid rounded-2" alt="Bootstrap Themes"
+                            width="700" height="500" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold lh-1 mb-3">Fresh Meats</h1>
+                        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                            world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
+                            responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Search Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xxl-12 px-4 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold lh-1 mb-3">Top Brands Availabe</h1>
+                        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                            world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
+                            responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Shop Now</button>
+                        </div>
+                    </div>
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        <img src="./images/clothes.jpeg" class="d-block mx-lg-auto img-fluid rounded-2" alt="Bootstrap Themes"
+                            width="700" height="500" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                        width="40" height="32" viewBox="0 0 256 256" xml:space="preserve">
+
+                        <defs>
+                        </defs>
+                        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                            transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                            <path
+                                d="M 79.666 51.755 c 0 -1.794 -1.459 -3.253 -3.253 -3.253 s -3.254 1.459 -3.254 3.253 c 0 1.443 0.951 2.655 2.254 3.079 v 10.169 c 0 5.789 -4.71 10.499 -10.499 10.499 s -10.499 -4.71 -10.499 -10.499 V 54.834 c 1.303 -0.425 2.253 -1.637 2.253 -3.079 c 0 -1.794 -1.459 -3.253 -3.253 -3.253 s -3.254 1.459 -3.254 3.253 c 0 1.443 0.951 2.655 2.254 3.079 v 10.169 c 0 6.892 5.607 12.499 12.499 12.499 s 12.499 -5.607 12.499 -12.499 V 54.834 C 78.716 54.41 79.666 53.198 79.666 51.755 z M 53.415 50.502 c 0.69 0 1.253 0.563 1.253 1.253 s -0.563 1.253 -1.253 1.253 c -0.691 0 -1.254 -0.563 -1.254 -1.253 S 52.724 50.502 53.415 50.502 z M 76.413 53.008 c -0.691 0 -1.254 -0.563 -1.254 -1.253 s 0.563 -1.253 1.254 -1.253 c 0.69 0 1.253 0.563 1.253 1.253 S 77.104 53.008 76.413 53.008 z"
+                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                            <path
+                                d="M 84.737 46.622 c -0.146 -1.585 -1.456 -2.78 -3.048 -2.78 H 63.564 l -1.371 -14.894 c -0.188 -2.03 -1.867 -3.562 -3.906 -3.562 h -6.481 v -8.082 C 51.805 7.763 44.042 0 34.5 0 S 17.195 7.763 17.195 17.305 v 8.082 h -6.482 c -2.039 0 -3.718 1.531 -3.905 3.562 L 1.58 85.719 c -0.101 1.096 0.266 2.189 1.007 3.002 C 3.329 89.534 4.384 90 5.484 90 h 38.966 h 40.926 c 0.858 0 1.683 -0.364 2.262 -0.998 c 0.578 -0.635 0.864 -1.488 0.786 -2.343 L 84.737 46.622 z M 19.195 17.305 C 19.195 8.866 26.061 2 34.5 2 s 15.305 6.866 15.305 15.305 v 8.082 H 19.195 V 17.305 z M 4.065 87.373 c -0.369 -0.403 -0.544 -0.926 -0.494 -1.471 L 8.8 29.131 c 0.092 -0.995 0.915 -1.745 1.914 -1.745 h 6.482 v 4.741 C 15.366 32.578 14 34.221 14 36.188 c 0 2.313 1.882 4.195 4.195 4.195 c 2.313 0 4.195 -1.882 4.195 -4.195 c 0 -1.967 -1.366 -3.61 -3.195 -4.061 v -4.741 h 30.609 v 4.741 c -1.83 0.451 -3.195 2.094 -3.195 4.062 c 0 2.313 1.882 4.195 4.195 4.195 S 55 38.501 55 36.188 c 0 -1.967 -1.366 -3.61 -3.195 -4.062 v -4.741 h 6.481 c 1 0 1.822 0.75 1.914 1.745 l 1.355 14.71 H 48.139 c -1.592 0 -2.901 1.195 -3.047 2.78 l -3.688 40.037 c -0.043 0.46 0.028 0.916 0.186 1.341 H 5.484 C 4.938 88 4.433 87.777 4.065 87.373 z M 18.195 33.993 c 1.21 0 2.195 0.985 2.195 2.195 s -0.984 2.195 -2.195 2.195 S 16 37.399 16 36.188 S 16.985 33.993 18.195 33.993 z M 50.805 33.993 c 1.211 0 2.195 0.985 2.195 2.195 s -0.984 2.195 -2.195 2.195 s -2.195 -0.984 -2.195 -2.195 S 49.594 33.993 50.805 33.993 z M 86.16 87.654 C 85.957 87.877 85.679 88 85.377 88 H 44.451 c -0.302 0 -0.58 -0.123 -0.784 -0.346 c -0.203 -0.224 -0.3 -0.512 -0.272 -0.812 l 3.688 -40.037 c 0.05 -0.55 0.504 -0.964 1.056 -0.964 h 33.551 c 0.552 0 1.006 0.414 1.056 0.964 l 3.688 40.037 C 86.461 87.143 86.364 87.431 86.16 87.654 z"
+                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"
+                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                        </g>
+                    </svg>
+                    </a>
+                    <span class="mb-3 mb-md-0 text-muted">&copy; 2022 Company, Inc</span>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#twitter" />
+                            </svg></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#instagram" />
+                            </svg></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#facebook" />
+                            </svg></a></li>
+                </ul>
+            </footer>
+
+
+        </footer>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
