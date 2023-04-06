@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class DashboardProductController extends Controller
 {
+    public function index()
+    {
+        return view('dashboard.index', [
+            'products' => User::find(auth()->id())->products
+        ]);
+    }
+
     public function create()
     {
         return view('dashboard.create');
@@ -38,8 +46,8 @@ class DashboardProductController extends Controller
         return substr($productDescription, 0, 95) . '...';
     }
 
-    protected function setSlugFromProductName(String $productName) {
+    protected function setSlugFromProductName(String $productName)
+    {
         return implode('-', explode(' ', strtolower($productName)));
     }
-
 }

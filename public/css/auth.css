@@ -15,4 +15,15 @@ body {
   padding: 15px;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
+a:hover {
+  color: inherit;
+}
+
+img {
+  object-fit: cover;
+}

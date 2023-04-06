@@ -6,6 +6,7 @@
     </a>
     <ul class="dropdown-menu text-small">
         <li><a class="dropdown-item" href="/dashboard/add-product">New product...</a></li>
+        <li><a class="dropdown-item" href="/dashboard/my-products">My Products</a></li>
         <li><a class="dropdown-item" href="#">Profile</a></li>
         <li>
             <hr class="dropdown-divider">

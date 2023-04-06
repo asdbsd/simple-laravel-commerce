@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             'firstName' => 'Gregs',
             'lastName' => 'Charls',
             'username' => 'gregCharls',
-            'email' => 'greg@hotmail.com'
+            'email' => 'greg@hotmail.com',
+            'password' => bcrypt('123456')
         ]);
 
         Product::factory(5)->create([

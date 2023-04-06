@@ -73,7 +73,7 @@
 </svg>
 
 
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light me-2" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -99,7 +99,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="/dashboard" class="nav-link @if($all) active @else link-dark @endif" aria-current="page">
+            <a href="/" class="nav-link link-dark" aria-current="page">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#home" />
                 </svg>
@@ -107,11 +107,11 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark">
+            <a href="/dashboard/my-products" class="nav-link @if($all) active @else link-dark @endif">
                 <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#speedometer2" />
+                    <use xlink:href="#grid" />
                 </svg>
-                Dashboard
+                 My Products
             </a>
         </li>
         <li>
@@ -127,7 +127,7 @@
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#grid" />
                 </svg>
-                Products
+                 My Products
             </a>
         </li>
         <li>
