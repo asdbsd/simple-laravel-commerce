@@ -4,7 +4,7 @@
 <div class="card shadow-sm m-1">
     <x-products.link :product="$product" />
 
-    <div class="row my-1">
+    <div class="row my-3 mx-2">
         <div class="col-8">
             <div class="btn-group ms-1">
                 @if (auth()->id() === $product->user_id)

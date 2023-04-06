@@ -10,7 +10,7 @@ class ProductsController extends Controller
     public function index() 
     {
         return view('products.index', [
-            'products' => Product::all()
+            'products' => Product::where('user_id', '!=', auth()->id())->get()
         ]);
     }
 
