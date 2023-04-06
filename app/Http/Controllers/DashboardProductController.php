@@ -24,21 +24,46 @@ class DashboardProductController extends Controller
 
     public function store()
     {
+        $attributes = $this->validateProduct();
+
+        Product::create($attributes);
+        return redirect('/store/' . $attributes['slug']);
+    }
+
+    public function edit(Product $product)
+    {
+        return view('dashboard.edit', [
+            'product' => $product
+        ]);
+    }
+
+    public function update(Product $product)
+    {
+        $attributes = $this->validateProduct($product);
+
+        if($attributes['image'] ?? false) {
+            $attributes['image'] = request()->file('image')->store('images');
+        }
+
+        $product->update($attributes);
+        return redirect('/store/' . $product->slug);
+    }
+
+    protected function validateProduct(?Product $product = null): array
+    {
+        $product ??= new Product();
 
         $attributes = request()->validate([
-            'name' => ['required', 'min:5', 'max:60', Rule::unique('products', 'name')],
+            'name' => ['required', 'min:5', 'max:60', Rule::unique('products', 'name')->ignore($product->id)],
             'description' => ['required', 'min:5', 'max: 500'],
-            'image' => ['required', 'image']
+            'image' => $product->exists ? ['image'] : ['required', 'image']
         ]);
 
         $attributes['user_id'] = auth()->id();
-        $attributes['image'] = request()->file('image')->store('images');
         $attributes['slug'] = $this->setSlugFromProductName($attributes['name']);
         $attributes['excerpt'] = $this->setExcerptFromDescription($attributes['description']);
 
-        Product::create($attributes);
-
-        return redirect('/store/' . $attributes['slug']);
+        return $attributes;
     }
 
     protected function setExcerptFromDescription(String $productDescription)

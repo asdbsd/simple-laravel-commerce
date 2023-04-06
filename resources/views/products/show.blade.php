@@ -26,10 +26,10 @@
                 {{ $product->description }}
             </p>
             @if (auth()->id() === $product->user_id)
-                <button class="btn btn-sm btn-outline-primary" type="button">Edit</button>
-                <button class="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary" type="button">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" type="button">Delete</a>
             @else
-                <button class="btn btn-sm btn-outline-success" type="button">Buy Now</button>
+                <a class="btn btn-sm btn-outline-success" type="button">Buy Now</a>
             @endif
 
         </div>

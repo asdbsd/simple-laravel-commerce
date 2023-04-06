@@ -17,14 +17,14 @@
                 <div class="col-sm-12">
                     <label class="form-label">Description</label>
                     <textarea rows="4" type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                         placeholder="Product description" value="{{ old('description') }}" required></textarea>
+                         placeholder="Product description" required>{{ old('description') }}</textarea>
                     @error('description')
                         <div class="text-danger form-text">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="col-12">
-                    <label class="form-label">Image</label>
+                    <label class="form-label">Product Image</label>
                     <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
                     @error('image')
                         <div class="text-danger form-text">{{ $message }}</div>

@@ -8,10 +8,10 @@
         <div class="col-8">
             <div class="btn-group ms-1">
                 @if (auth()->id() === $product->user_id)
-                    <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                    <a href="/dashboard/edit-product/{{ $product->slug }}" type="button" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a type="button" class="btn btn-sm btn-outline-danger">Delete</a>
                 @else
-                    <button type="button" class="btn btn-sm btn-outline-success">Buy Now</button>
+                    <a type="button" class="btn btn-sm btn-outline-success">Buy Now</a>
                 @endif
 
 
