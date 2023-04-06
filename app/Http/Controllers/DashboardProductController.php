@@ -49,6 +49,11 @@ class DashboardProductController extends Controller
         return redirect('/store/' . $product->slug);
     }
 
+    public function destroy(Product $product) {
+        $product->delete();
+        return back();
+    }
+
     protected function validateProduct(?Product $product = null): array
     {
         $product ??= new Product();

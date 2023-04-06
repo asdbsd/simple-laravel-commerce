@@ -26,10 +26,19 @@
                 {{ $product->description }}
             </p>
             @if (auth()->id() === $product->user_id)
-                <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary" type="button">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" type="button">Delete</a>
+             
+                <form action="/dashboard/{{ $product->slug }}">
+                    @csrf
+                    @method('DELETE')
+
+                    <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary"
+                        type="button">Edit</a>
+                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                        type="button">Delete</button>
+
+                </form>
             @else
-                <a class="btn btn-sm btn-outline-success" type="button">Buy Now</a>
+                <a class="btn btn-sm btn-outline-success" type="button" disabled>Buy Now</a>
             @endif
 
         </div>
