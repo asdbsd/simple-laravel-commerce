@@ -1,4 +1,4 @@
-<x-dashboard-layout :add="true">
+<x-dashboard-layout>
     <div class="col-md-7 col-lg-8 ms-3">
         <h4 class="mb-3">Edit Product</h4>
         <form method="POST" action="/dashboard/edit-product/{{ $product->slug }}" enctype="multipart/form-data">
