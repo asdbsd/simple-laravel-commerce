@@ -30,9 +30,6 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
-// Dashboard routes
-Route::get('/dashboard', [DashboardIndexController::class, 'index'])->middleware('auth');
-
 // Products index and show routes
 Route::get('/store', [ProductsController::class, 'index']);
 Route::get('/store/{product}', [ProductsController::class, 'show']);
@@ -44,4 +41,8 @@ Route::post('/dashboard/add-product', [DashboardProductController::class, 'store
 Route::get('/dashboard/edit-product/{product}', [DashboardProductController::class, 'edit'])->middleware('auth');
 Route::patch('/dashboard/edit-product/{product}', [DashboardProductController::class, 'update'])->middleware('auth');
 Route::delete('/dashboard/{product}', [DashboardProductController::class, 'destroy'])->middleware('auth');
+
+Route::fallback(fn() => redirect('/store'));
+
+
 
