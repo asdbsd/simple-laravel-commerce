@@ -16,7 +16,7 @@
         </div>
 
 
-        <img class="col-md-3 rounded-2 m-0 p-0" src="{{ $product->image }}" alt="{{ $product->slug . '-image' }}" />
+        <img class="col-md-3 rounded-2 m-0 p-0" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->slug . '-image' }}" />
 
         <div class="col-md-7">
 

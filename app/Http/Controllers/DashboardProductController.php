@@ -16,16 +16,30 @@ class DashboardProductController extends Controller
 
     public function store()
     {
+
         $attributes = request()->validate([
-            'name' => ['required', 'min:5', 'max:60'],
-            'slug' => ['required', 'min:5', 'max:60', Rule::unique('products', 'slug')],
-            'excerpt' => ['required', 'min:5', 'max:100'],
-            'description' => ['required', 'min:5', 'max: 350'],
-            'image' => ['required'],
-            'user_id' => ['required', Rule::exists('users', 'id')]
+            'name' => ['required', 'min:5', 'max:60', Rule::unique('products', 'name')],
+            'description' => ['required', 'min:5', 'max: 500'],
+            'image' => ['required', 'image']
         ]);
 
+        $attributes['user_id'] = auth()->id();
+        $attributes['image'] = request()->file('image')->store('images');
+        $attributes['slug'] = $this->setSlugFromProductName($attributes['name']);
+        $attributes['excerpt'] = $this->setExcerptFromDescription($attributes['description']);
+
         Product::create($attributes);
+
+        return redirect('/store/' . $attributes['slug']);
+    }
+
+    protected function setExcerptFromDescription(String $productDescription)
+    {
+        return substr($productDescription, 0, 95) . '...';
+    }
+
+    protected function setSlugFromProductName(String $productName) {
+        return implode('-', explode(' ', strtolower($productName)));
     }
 
 }

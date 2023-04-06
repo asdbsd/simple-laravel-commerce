@@ -12,7 +12,7 @@ main {
     text-decoration: none;
 }
 .product-header {
-    background-image: url('../images/header-image.jpg');
+    background-image: url('../../storage/images/header-image.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;

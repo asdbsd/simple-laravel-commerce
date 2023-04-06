@@ -39,7 +39,6 @@
         <div class="row">
 
             @foreach ($products as $product)
-                
                 <div class="col-4">
                     <x-products.box :product="$product" />
                 </div>

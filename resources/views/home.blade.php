@@ -24,7 +24,7 @@
             </div>
             <div class="overflow-hidden" style="max-height: 30vh;">
                 <div class="container px-5">
-                    <img src="/images/beverages.jpg" class="img-fluid border rounded-3 shadow-lg mb-4"
+                    <img src="/storage/images/beverages.jpg" class="img-fluid border rounded-3 shadow-lg mb-4"
                         alt="Example image" width="700" height="500" loading="lazy">
                 </div>
             </div>
@@ -33,7 +33,7 @@
         <div class="col-xxl-12 px-4 py-5">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5 border-bottom rounded-4">
                 <div class="col-10 col-sm-8 col-lg-6">
-                    <img src="/images/meat.jpeg" class="d-block mx-lg-auto img-fluid rounded-2" alt="Bootstrap Themes"
+                    <img src="/storage/images/meat.jpeg" class="d-block mx-lg-auto img-fluid rounded-2" alt="Bootstrap Themes"
                         width="700" height="500" loading="lazy">
                 </div>
                 <div class="col-lg-6">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="col-10 col-sm-8 col-lg-6">
-                    <img src="/images/clothes.jpeg" class="d-block mx-lg-auto img-fluid rounded-2"
+                    <img src="/storage/images/clothes.jpeg" class="d-block mx-lg-auto img-fluid rounded-2"
                         alt="Bootstrap Themes" width="700" height="500" loading="lazy">
                 </div>
             </div>
