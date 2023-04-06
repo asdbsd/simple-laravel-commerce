@@ -4,7 +4,7 @@
     <div class="row">
         <h5>Categories</h5>
         <div class="list-group col-md-2 my-2">
-       
+
             <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
                 The current button
             </button>
@@ -16,7 +16,8 @@
         </div>
 
 
-        <img class="col-md-3 rounded-2 m-0 p-0" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->slug . '-image' }}" />
+        <img class="col-md-3 rounded-2 m-0 p-0" src="{{ asset('storage/' . $product->image) }}"
+            alt="{{ $product->slug . '-image' }}" />
 
         <div class="col-md-7">
 
@@ -24,7 +25,12 @@
             <p>
                 {{ $product->description }}
             </p>
-            <button class="btn btn-sm btn-outline-primary" type="button">Buy Now</button>
+            @if (auth()->id() === $product->user_id)
+                <button class="btn btn-sm btn-outline-primary" type="button">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" type="button">Delete</button>
+            @else
+                <button class="btn btn-sm btn-outline-success" type="button">Buy Now</button>
+            @endif
 
         </div>
 
