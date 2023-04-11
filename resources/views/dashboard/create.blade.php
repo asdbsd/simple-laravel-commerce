@@ -5,19 +5,27 @@
             @csrf
 
             <div class="row g-3">
-                <div class="col-sm-12">
+                <div class="col-sm-8">
                     <label class="form-label">Product Name</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="" value="{{ old('name') }}"
-                        required>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                        placeholder="" value="{{ old('name') }}" required>
                     @error('name')
+                        <div class="text-danger form-text">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-sm-4">
+                    <label class="form-label">Product Category</label>
+                    <x-form-elements.select :categories="$categories" />
+                    @error('category_id')
                         <div class="text-danger form-text">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="col-sm-12">
                     <label class="form-label">Description</label>
-                    <textarea rows="4" type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                         placeholder="Product description" required>{{ old('description') }}</textarea>
+                    <textarea rows="4" type="text" name="description"
+                        class="form-control @error('description') is-invalid @enderror" placeholder="Product description" required>{{ old('description') }}</textarea>
                     @error('description')
                         <div class="text-danger form-text">{{ $message }}</div>
                     @enderror
@@ -31,10 +39,10 @@
                     @enderror
                 </div>
 
-                
-            <hr class="my-4">
 
-            <button class="w-100 btn btn-success btn-lg" type="submit">Create Product</button>
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-success btn-lg" type="submit">Create Product</button>
         </form>
     </div>
 </x-dashboard-layout>

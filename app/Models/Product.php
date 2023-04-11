@@ -9,7 +9,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'excerpt', 'description', 'user_id', 'image'];
+    protected $fillable = ['name', 'slug', 'excerpt', 'description', 'user_id', 'image', 'category_id'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     // hasOne, hasMany, belongsTo, belongsToMany
     public function owner() 
@@ -17,8 +22,7 @@ class Product extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

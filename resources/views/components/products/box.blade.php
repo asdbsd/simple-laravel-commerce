@@ -7,7 +7,7 @@
     <div class="row my-3 mx-2">
         <div class="col-8">
 
-            @if (auth()->id() === $product->user_id)
+            @canany (['update', 'destroy'], $product)
                 <form method="POST" action="/dashboard/{{ $product->slug }}">
                     @csrf
                     @method('DELETE')
@@ -21,12 +21,12 @@
                 </form>
             @else
                 <a type="button" class="btn btn-sm btn-outline-success" disabled>Buy Now</a>
-            @endif
+            @endcanany
 
 
         </div>
         <div class="col-4 text-center">
-            <x-products.category />
+            <x-products.category :category="$product->category" />
         </div>
     </div>
 

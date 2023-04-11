@@ -25,7 +25,7 @@
             <p>
                 {{ $product->description }}
             </p>
-            @if (auth()->id() === $product->user_id)
+            @canany (['update', 'destroy'], $product)
              
                 <form action="/dashboard/{{ $product->slug }}">
                     @csrf
@@ -39,7 +39,7 @@
                 </form>
             @else
                 <a class="btn btn-sm btn-outline-success" type="button" disabled>Buy Now</a>
-            @endif
+            @endcanany
 
         </div>
 

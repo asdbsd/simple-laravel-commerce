@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use Database\Factories\CategoryFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
         $user1 = User::factory()->create([
             'firstName' => 'Asen',
             'lastName' => 'Donchev',
@@ -37,16 +40,28 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456')
         ]);
 
+        $category1 = Category::factory()->create([
+            'name' => 'Test'
+        ]);
+
+        $category2 = Category::factory()->create([
+            'name' => 'Another Test'
+        ]);
+
+
         Product::factory(5)->create([
             'user_id' => $user2->id,
+            'category_id' => Category::factory()
         ]);
 
         Product::factory(2)->create([
             'user_id' => $user1->id,
+            'category_id' => $category2->id
         ]);
 
         Product::factory(7)->create([
-            'user_id' => $user3->id
+            'user_id' => $user3->id,
+            'category_id' => $category1->id
         ]);
 
 

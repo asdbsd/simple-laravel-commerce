@@ -6,11 +6,19 @@
             @method('PATCH')
 
             <div class="row g-3">
-                <div class="col-sm-12">
+                <div class="col-sm-18">
                     <label class="form-label">Product Name</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="" value="{{ !$product ? old('name') : $product->name }}"
                         required />
                     @error('name')
+                        <div class="text-danger form-text">{{ $message }}</div>
+                    @enderror
+                </div>
+                
+                <div class="col-sm-4">
+                    <label class="form-label">Product Category</label>
+                    <x-form-elements.select :categories="$categories" :product="$product" />
+                    @error('category_id')
                         <div class="text-danger form-text">{{ $message }}</div>
                     @enderror
                 </div>
