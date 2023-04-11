@@ -10,6 +10,17 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'slug', 'excerpt', 'description', 'user_id', 'image', 'category_id'];
+    protected $with = ['category', 'owner'];
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query
+            ->when(
+                $filters['category'] ?? false,
+                fn ($query, $category) =>
+                $query->whereHas('category', fn ($query) => $query->where('slug', $category))
+            );
+    }
 
     public function getRouteKeyName()
     {
@@ -17,12 +28,13 @@ class Product extends Model
     }
 
     // hasOne, hasMany, belongsTo, belongsToMany
-    public function owner() 
+    public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class, 'category_id');
     }
 }

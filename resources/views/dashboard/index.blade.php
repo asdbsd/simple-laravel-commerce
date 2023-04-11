@@ -1,7 +1,7 @@
 <x-dashboard-layout :all="true">
 
     <div class="row">
-
+        <x-products.filters :categories="$categories"/>
         @if (count($products))
             @foreach ($products as $product)
                 <div class="col-4">

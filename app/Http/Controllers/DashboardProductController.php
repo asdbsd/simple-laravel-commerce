@@ -12,8 +12,13 @@ class DashboardProductController extends Controller
 {
     public function index()
     {
+        $products = User::find(auth()->id())->products;
+        $products_ids = array_map(fn($pr) => $pr->category_id, $products->all());
+        $categories = array_unique(array_map(fn($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $products->all()));
+
         return view('dashboard.index', [
-            'products' => User::find(auth()->id())->products
+            'products' => $products,
+            'categories' => $categories
         ]);
     }
 
@@ -38,7 +43,7 @@ class DashboardProductController extends Controller
 
     public function edit(Product $product)
     {
-        
+
         $this->authorize('update', $product);
 
         return view('dashboard.edit', [
@@ -53,7 +58,7 @@ class DashboardProductController extends Controller
 
         $attributes = $this->validateProduct($product);
 
-        if($attributes['image'] ?? false) {
+        if ($attributes['image'] ?? false) {
             $attributes['image'] = request()->file('image')->store('images');
         }
 
@@ -61,7 +66,8 @@ class DashboardProductController extends Controller
         return redirect('/store/' . $product->slug);
     }
 
-    public function destroy(Product $product) {
+    public function destroy(Product $product)
+    {
         $this->authorize('delete', $product);
 
         $product->delete();

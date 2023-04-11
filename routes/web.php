@@ -31,7 +31,7 @@ Route::get('/register', [RegisterController::class, 'create'])->middleware('gues
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
 // Products index and show routes
-Route::get('/store', [ProductsController::class, 'index']);
+Route::get('/store', [ProductsController::class, 'index'])->name('store');
 Route::get('/store/{product}', [ProductsController::class, 'show']);
 
 Route::middleware('auth')->group(function() {
@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function() {
 // Dashboard Product routes
 
 
-Route::fallback(fn() => redirect('/store'));
+// Route::fallback(fn() => redirect('/store'));
 
 
 
