@@ -10,23 +10,34 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'slug', 'excerpt', 'description', 'user_id', 'image', 'category_id'];
-    protected $with = ['category', 'owner'];
+    protected $with = ['category'];
 
     public function scopeFilter($query, array $filters)
     {
+
+        $query
+            ->when(
+                $filters['search'] ?? false,
+                fn ($query, $search) =>
+                    $query->where(fn ($query) =>
+                        $query
+                            ->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('description', 'like', '%' . $search . '%')
+                            ->orWhereHas('category', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))    
+                    )
+            );
+
         $query
             ->when(
                 $filters['category'] ?? false,
                 fn ($query, $category) =>
-                $query->whereHas('category', fn ($query) => $query->where('slug', $category))
+                    $query->whereHas('category', fn ($query) => $query->where('slug', $category))
             );
 
 
         $query
-            ->when(
-                $filters['orderBy'] ?? false,
-                fn ($query, $order) =>
-                $query->orderBy('name', $order));
+            ->when($filters['orderBy'] ?? false,
+                fn ($query, $order) => $query->orderBy('name', $order));
     }
 
     public function getRouteKeyName()

@@ -18,7 +18,7 @@ class ProductsController extends Controller
 
         $filteredProducts = Product::latest()
             ->where('user_id', '!=', auth()->id())
-                ->filter(request(['category', 'orderBy']))
+                ->filter(request(['search' ,'category', 'orderBy']))
                 ->get();
         $products_ids = array_map(fn ($pr) => $pr->category_id, $allProducts->all());
         $categories = array_unique(array_map(fn ($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $allProducts->all()));

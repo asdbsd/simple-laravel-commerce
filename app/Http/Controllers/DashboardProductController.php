@@ -15,7 +15,7 @@ class DashboardProductController extends Controller
         $allUserProducts = Product::latest()
             ->where('user_id', '=', auth()->id());
         $filteredUserProducts = $allUserProducts
-            ->filter(request(['category', 'orderBy']));
+            ->filter(request(['search' ,'category', 'orderBy']));
 
         $products_ids = array_map(fn ($pr) => $pr->category_id, $allUserProducts->get()->all());
 

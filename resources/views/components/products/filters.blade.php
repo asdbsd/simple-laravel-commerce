@@ -4,9 +4,9 @@
     <div class="col-4">
         <strong>Search by Name</strong>
         <div class="input-group input-group-sm mb-3">
-            <input type="text" class="form-control" placeholder="Product Name/Category"
-                aria-label="Product Name/Category" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+            <input value="{{ request()->query('search') }}" id="searchInput" type="text" class="form-control"
+                placeholder="Product Name/Category">
+            <button class="btn btn-outline-secondary" type="button" id="searchBtn">Search</button>
         </div>
     </div>
     <div class="col-3">
@@ -37,20 +37,21 @@
     }
 
     const optionChangeEvent = (data, event) => {
-
         const selectElement = event.target;
-        const selectedElementValue = selectElement.options[selectElement.selectedIndex].value;
+        let selectedElementValue = document.querySelector('#searchInput').value != '' ? document.querySelector(
+            '#searchInput').value : 'all';
 
-        location.assign(getNewLocation([selectElement.id, selectedElementValue]));
+
+        if (data !== 'search') {
+            selectedElementValue = selectElement.options[selectElement.selectedIndex].value;
+        }
+
+        location.assign(getNewLocation([data, selectedElementValue]));
 
     };
 
-    document.querySelector('#category').addEventListener('change', optionChangeEvent.bind(null, 'category'));
-    document.querySelector('#orderBy').addEventListener('change', optionChangeEvent.bind(null, 'orderBy'));
     const getUpdatedLocation = (newData) => {
         const newLoc = location.href.split('?').reduce((acc, currentEl, index, originalArr) => {
-
-
 
             if (originalArr.length > 1 && index > 0) {
                 const splitedQueryParams = currentEl.split('&');
@@ -76,5 +77,10 @@
 
             return acc;
         }, '')
+
     }
+
+    document.querySelector('#category').addEventListener('change', optionChangeEvent.bind(null, 'category'));
+    document.querySelector('#orderBy').addEventListener('change', optionChangeEvent.bind(null, 'orderBy'));
+    document.querySelector('#searchBtn').addEventListener('click', optionChangeEvent.bind(null, 'search'));
 </script>

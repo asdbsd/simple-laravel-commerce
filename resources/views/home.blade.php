@@ -6,7 +6,7 @@
                 <h1 class="display-4 fw-normal">Punny headline</h1>
                 <p class="lead fw-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts
                     with this example based on Apple’s marketing pages.</p>
-                <a class="btn btn-outline-secondary" href="#">Go to Store</a>
+                <a class="btn btn-outline-secondary" href="/store">Go to Store</a>
             </div>
         </div>
 
