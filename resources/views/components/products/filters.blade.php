@@ -27,7 +27,6 @@
             <option value="asc" @if (request()->query('orderBy') == 'asc') selected @endif>Name Ascending</option>
             <option value="desc" @if (request()->query('orderBy') == 'desc') selected @endif>Name Descending</option>
         </select>
-
     </div>
 </div>
 
@@ -40,7 +39,6 @@
         const selectElement = event.target;
         let selectedElementValue = document.querySelector('#searchInput').value != '' ? document.querySelector(
             '#searchInput').value : 'all';
-
 
         if (data !== 'search') {
             selectedElementValue = selectElement.options[selectElement.selectedIndex].value;
