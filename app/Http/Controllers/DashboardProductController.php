@@ -12,8 +12,8 @@ class DashboardProductController extends Controller
 {
     public function index()
     {
-        $allUserProducts = Product::latest()
-            ->where('user_id', '=', auth()->id());
+        $allUserProducts = Product::where('user_id', '=', auth()->id());
+
         $filteredUserProducts = $allUserProducts
             ->filter(request(['search' ,'category', 'orderBy']));
 

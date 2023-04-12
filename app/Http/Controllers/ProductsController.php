@@ -12,19 +12,17 @@ class ProductsController extends Controller
     {
 
 
-        $allProducts = Product::latest()
-            ->where('user_id', '!=', auth()->id())->get();
+        $allUserProducts = Product::where('user_id', '!=', auth()->id())->get()->all();
 
+        $products_ids = array_map(fn ($pr) => $pr->category_id, $allUserProducts);
+        $categories = array_unique(array_map(fn ($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $allUserProducts));
 
-        $filteredProducts = Product::latest()
-            ->where('user_id', '!=', auth()->id())
-                ->filter(request(['search' ,'category', 'orderBy']))
-                ->get();
-        $products_ids = array_map(fn ($pr) => $pr->category_id, $allProducts->all());
-        $categories = array_unique(array_map(fn ($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $allProducts->all()));
+        // dd($categories);
 
         return view('products.index', [
-            'products' => $filteredProducts,
+            'products' => Product::where('user_id', '!=', auth()->id())
+                ->filter(request(['search', 'category', 'orderBy']))
+                ->get(),
             'categories' => $categories
 
         ]);
