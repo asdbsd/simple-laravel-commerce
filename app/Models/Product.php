@@ -20,6 +20,13 @@ class Product extends Model
                 fn ($query, $category) =>
                 $query->whereHas('category', fn ($query) => $query->where('slug', $category))
             );
+
+
+        $query
+            ->when(
+                $filters['orderBy'] ?? false,
+                fn ($query, $order) =>
+                $query->orderBy('name', $order));
     }
 
     public function getRouteKeyName()

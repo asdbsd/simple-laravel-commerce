@@ -23,34 +23,58 @@
     <div class="col-2">
         <strong>Order by</strong>
         <select id="orderBy" class="form-select form-select-sm">
-            <option selected disabled>Order By</option>
-            <option value="nameAsc">Name Ascending</option>
-            <option value="nameDsc">Name Descending</option>
+            <option value="all" selected>No Sorting</option>
+            <option value="asc" @if (request()->query('orderBy') == 'asc') selected @endif>Name Ascending</option>
+            <option value="desc" @if (request()->query('orderBy') == 'desc') selected @endif>Name Descending</option>
         </select>
 
     </div>
 </div>
 
 <script>
-
-    const categoryRedirectLink = (element) => {
-        const categorySlug = element.options[element.selectedIndex].value;
-        return categorySlug == 'all' ? location['pathname'] : location['pathname'] + '?category=' +  categorySlug;
+    const getNewLocation = (queryStringArr) => {
+        return location['pathname'] + getUpdatedLocation(queryStringArr);
     }
-    const orderByRedirectLink = () => {
 
-    }
     const optionChangeEvent = (data, event) => {
-        const selectElement = event.target;
-        const actions = {
-            category: categoryRedirectLink(selectElement),
-            orderBy: orderByRedirectLink(selectElement)
-        }
 
-        location.assign(actions[data]);
+        const selectElement = event.target;
+        const selectedElementValue = selectElement.options[selectElement.selectedIndex].value;
+
+        location.assign(getNewLocation([selectElement.id, selectedElementValue]));
+
     };
 
     document.querySelector('#category').addEventListener('change', optionChangeEvent.bind(null, 'category'));
     document.querySelector('#orderBy').addEventListener('change', optionChangeEvent.bind(null, 'orderBy'));
+    const getUpdatedLocation = (newData) => {
+        const newLoc = location.href.split('?').reduce((acc, currentEl, index, originalArr) => {
 
+
+
+            if (originalArr.length > 1 && index > 0) {
+                const splitedQueryParams = currentEl.split('&');
+                splitedQueryParams.forEach(paramPair => {
+                    const [key, value] = [...paramPair.split('=')];
+                    acc[key] = value;
+                });
+
+            }
+
+            if (newData[1] === 'all') {
+                acc[newData[0]] ? delete acc[newData[0]] : null;
+                return acc;
+            }
+
+            acc[newData[0]] = newData[1];
+
+            return acc;
+        }, {});
+
+        return Object.entries(newLoc).reduce((acc, [key, value], index) => {
+            acc += (index == 0 ? '?' : '&') + key + '=' + value;
+
+            return acc;
+        }, '')
+    }
 </script>
