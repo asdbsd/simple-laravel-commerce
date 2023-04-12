@@ -12,12 +12,17 @@ class DashboardProductController extends Controller
 {
     public function index()
     {
-        $products = User::find(auth()->id())->products;
-        $products_ids = array_map(fn($pr) => $pr->category_id, $products->all());
-        $categories = array_unique(array_map(fn($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $products->all()));
+        $allUserProducts = User::find(auth()->id())->products;
+        $filteredUserProducts = Product::latest()
+            ->where('user_id', '=', auth()->id())
+            ->filter(request(['search', 'category', 'owner']))
+            ->get();
+        $products_ids = array_map(fn ($pr) => $pr->category_id, $allUserProducts->all());
+
+        $categories = array_unique(array_map(fn ($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $allUserProducts->all()));
 
         return view('dashboard.index', [
-            'products' => $products,
+            'products' => $filteredUserProducts,
             'categories' => $categories
         ]);
     }

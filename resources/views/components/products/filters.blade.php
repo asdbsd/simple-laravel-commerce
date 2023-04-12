@@ -11,35 +11,46 @@
     </div>
     <div class="col-3">
         <strong>Search by Category</strong>
-        <select class="form-select form-select-sm mb-3">
+        <select id="category" class="form-select form-select-sm mb-3">
 
             <option value="all" selected>All</option>
             @foreach ($categories as $category)
-                <option value="{{ $category->slug }}" @if (request()->query('category') && request()->query('category') === $category->slug) selected  @endif>{{ $category->name }}</option>
+                <option value="{{ $category->slug }}" @if (request()->query('category') && request()->query('category') === $category->slug) selected @endif>
+                    {{ $category->name }}</option>
             @endforeach
         </select>
     </div>
     <div class="col-2">
         <strong>Order by</strong>
-        <select class="form-select form-select-sm">
+        <select id="orderBy" class="form-select form-select-sm">
             <option selected disabled>Order By</option>
-            <option value="1">Name Ascending</option>
-            <option value="2">Name Descending</option>
-            <option value="3">Price Ascending</option>
-            <option value="3">Price Descending</option>
+            <option value="nameAsc">Name Ascending</option>
+            <option value="nameDsc">Name Descending</option>
         </select>
 
     </div>
 </div>
 
 <script>
-    const optionChangeEvent = (event) => {
-        const selectElement = event.target;
-        const categorySlug = selectElement.options[selectElement.selectedIndex].value;
 
-        const newPath = categorySlug == 'all' ? location['pathname'] : location['pathname'] + '?category=' + categorySlug;
-        location.assign(`${newPath}`);
+    const categoryRedirectLink = (element) => {
+        const categorySlug = element.options[element.selectedIndex].value;
+        return categorySlug == 'all' ? location['pathname'] : location['pathname'] + '?category=' +  categorySlug;
+    }
+    const orderByRedirectLink = () => {
+
+    }
+    const optionChangeEvent = (data, event) => {
+        const selectElement = event.target;
+        const actions = {
+            category: categoryRedirectLink(selectElement),
+            orderBy: orderByRedirectLink(selectElement)
+        }
+
+        location.assign(actions[data]);
     };
 
-    const data = document.querySelector('SELECT').addEventListener('change', optionChangeEvent);
+    document.querySelector('#category').addEventListener('change', optionChangeEvent.bind(null, 'category'));
+    document.querySelector('#orderBy').addEventListener('change', optionChangeEvent.bind(null, 'orderBy'));
+
 </script>
