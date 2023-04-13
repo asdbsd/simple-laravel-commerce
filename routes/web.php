@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\DashboardIndexController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\FavoritesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,20 +35,19 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 Route::get('/store', [ProductsController::class, 'index'])->name('store');
 Route::get('/store/{product}', [ProductsController::class, 'show']);
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard/my-products', [DashboardProductController::class, 'index']);
     Route::get('/dashboard/add-product', [DashboardProductController::class, 'create']);
     Route::post('/dashboard/add-product', [DashboardProductController::class, 'store']);
     Route::get('/dashboard/edit-product/{product}', [DashboardProductController::class, 'edit']);
     Route::patch('/dashboard/edit-product/{product}', [DashboardProductController::class, 'update']);
     Route::delete('/dashboard/{product}', [DashboardProductController::class, 'destroy']);
-});
 
+    // Product favorites route
+    Route::get('/store/{product}/favorites', [FavoritesController::class, 'store']);
+});
 
 // Dashboard Product routes
 
 
 // Route::fallback(fn() => redirect('/store'));
-
-
-

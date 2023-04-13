@@ -16,9 +16,12 @@
                         <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary"
                             type="button">Edit</a>
                         <button type="submit" class="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                        
                     </div>
 
                 </form>
+
+
             @else
                 <a type="button" class="btn btn-sm btn-outline-success" disabled>Buy Now</a>
             @endcanany

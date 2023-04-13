@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Favorable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -54,5 +55,19 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function favorites() 
+    {
+        return $this->morphMany(Favorite::class, 'favorited');
+    }
+
+    public function favorite(String $userId)
+    {
+        $attributes = ['user_id' => $userId];
+        if(! $this->favorites()->where($attributes)->exists()) {
+            return $this->favorites()->create($attributes);
+        }
+
     }
 }

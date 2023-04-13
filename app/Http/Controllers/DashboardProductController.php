@@ -4,25 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class DashboardProductController extends Controller
 {
     public function index()
     {
-        $allUserProducts = Product::where('user_id', '=', auth()->id());
+        $allUserProducts = Product::where('user_id', '=', auth()->id())->get()->all();
 
-        $filteredUserProducts = $allUserProducts
-            ->filter(request(['search' ,'category', 'orderBy']));
-
-        $products_ids = array_map(fn ($pr) => $pr->category_id, $allUserProducts->get()->all());
-
-        $categories = array_unique(array_map(fn ($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $allUserProducts->get()->all()));
+        $products_ids = array_map(fn ($pr) => $pr->category_id, $allUserProducts);
+        $categories = array_unique(array_map(fn ($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $allUserProducts));
 
         return view('dashboard.index', [
-            'products' => $filteredUserProducts->get(),
+            'products' => Product::where('user_id', '=', auth()->id())
+                ->filter(request(['search', 'category', 'orderBy']))
+                ->get(),
             'categories' => $categories
         ]);
     }
