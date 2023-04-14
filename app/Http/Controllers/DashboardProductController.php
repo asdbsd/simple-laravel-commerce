@@ -37,6 +37,7 @@ class DashboardProductController extends Controller
 
     public function store()
     {
+        // dd(request('price'));
         $this->authorize('create', Product::class);
 
         $attributes = $this->validateProduct();
@@ -86,6 +87,7 @@ class DashboardProductController extends Controller
 
         $attributes = request()->validate([
             'name' => ['required', 'min:5', 'max:60', Rule::unique('products', 'name')->ignore($product->id)],
+            'price' => ['required', 'numeric'],
             'description' => ['required', 'min:5', 'max: 500'],
             'image' => $product->exists ? ['image'] : ['required', 'image'],
             'category_id' => ['required', Rule::exists('categories', 'id')]

@@ -1,7 +1,7 @@
 <x-layout title="Products Store">
     <x-header.navigation />
     <x-products.filters :categories="$categories"/>
-    <main class="d-flex">
+    <main>
        
         <div class="row">
             @if (count($products))

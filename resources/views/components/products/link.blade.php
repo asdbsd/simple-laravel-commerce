@@ -5,6 +5,7 @@
 
     <div class="card-body">
         <h5 class="card-title">{{ $product->name }}</h5>
+        <small>Price: </small><strong class="pricing-card-title">£{{ $product->price}}</strong>
         <hr>
         <p>
             <x-products.category :category="$product->category" />

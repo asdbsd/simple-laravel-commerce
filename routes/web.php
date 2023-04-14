@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/favorites', [FavoritesController::class, 'index']);
     Route::post('/store/{product}/favorites', [FavoritesController::class, 'store'])->middleware('can:addFavorite,product');
     Route::delete('/store/{product}/favorites', [FavoritesController::class, 'destroy'])->middleware('can:removeFavorite,product');
+
+    Route::get('/store/{product}/purchase', [PurchaseController::class, 'index']);
+    Route::post('/store/{product}/purchase', [PurchaseController::class, 'index']);
+
 });
 
 // Dashboard Product routes
