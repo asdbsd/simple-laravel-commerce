@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/store/{product}/favorites', [FavoritesController::class, 'destroy'])->middleware('can:removeFavorite,product');
 
     Route::get('/store/{product}/purchase', [PurchaseController::class, 'index']);
-    Route::post('/store/{product}/purchase', [PurchaseController::class, 'index']);
+    Route::post('/store/{product}/purchase', [PurchaseController::class, 'create']);
 
 });
 

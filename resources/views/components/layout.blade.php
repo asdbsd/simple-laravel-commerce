@@ -1,6 +1,6 @@
 @props(['title', 'cssPath' => '/css/home-layout.css'])
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>

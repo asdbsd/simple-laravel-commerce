@@ -15,7 +15,7 @@
     </form>
 </x-layout>
 
-<script>
+<script defer>
     // This is your test publishable API key.
     const stripe = Stripe(
         "pk_test_51Mwi7DBQHcCtp6BWhGMNja1TcffxjtG2Ps1vlzyET17lGwgwY29gPvv9EhDe7SUIKtU0grMDHs9fFoL8Dvy4ILvK00klitnct1"
@@ -44,12 +44,16 @@
         } = await fetch(purchasePath, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify({
                 items
             }),
-        }).then((r) => r.json());
+        }).then((r) => r.json())
+            .then(console.log)
+            .catch(e => console.log(e))
+            
 
         elements = stripe.elements({
             clientSecret

@@ -24,16 +24,14 @@ class PurchaseController extends Controller
             return $product->price;
         }
         
-        header('Content-Type: application/json');
-        
         try {
             // retrieve JSON from POST body
-            // $jsonStr = file_get_contents('php://input');
-            // $jsonObj = json_decode($jsonStr);
+            $jsonStr = file_get_contents('php://input');
+            $jsonObj = json_decode($jsonStr);
         
             // Create a PaymentIntent with amount and currency
             $paymentIntent = \Stripe\PaymentIntent::create([
-                'amount' => calculateOrderAmount($product),
+                'amount' => calculateOrderAmount($jsonObj->items),
                 'currency' => 'gbp',
                 'automatic_payment_methods' => [
                     'enabled' => true,
@@ -43,7 +41,10 @@ class PurchaseController extends Controller
             $output = [
                 'clientSecret' => $paymentIntent->client_secret,
             ];
-            echo json_encode($output);
+            dd(json_encode($output));
+
+            return response()->json($output);
+
         } catch (Error $e) {
             http_response_code(500);
             echo json_encode(['error' => $e->getMessage()]);
