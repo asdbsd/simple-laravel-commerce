@@ -32,6 +32,10 @@ class ProductPolicy
     //     //
     // }
 
+    public function create(User $user) {
+        return $user->id == auth()->id();
+    }
+
     /**
      * Determine whether the user can update the model.
      */

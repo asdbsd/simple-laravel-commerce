@@ -27,6 +27,8 @@ class DashboardProductController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Product::class);
+
         return view('dashboard.create', [
             'categories' => Category::all()
         ]);
@@ -35,7 +37,8 @@ class DashboardProductController extends Controller
 
     public function store()
     {
-        // ddd(request()->all());
+        $this->authorize('create', Product::class);
+
         $attributes = $this->validateProduct();
 
         $attributes['image'] = request()->file('image')->store('images');
