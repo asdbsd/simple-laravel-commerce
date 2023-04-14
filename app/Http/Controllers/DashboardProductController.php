@@ -10,15 +10,17 @@ class DashboardProductController extends Controller
 {
     public function index()
     {
-        $allUserProducts = Product::where('user_id', '=', auth()->id())->get()->all();
 
-        $products_ids = array_map(fn ($pr) => $pr->category_id, $allUserProducts);
-        $categories = array_unique(array_map(fn ($pr) => in_array($pr->category_id, $products_ids) ? Category::find($pr->category_id) : null, $allUserProducts));
+        $products = Product::with('category')->where('user_id', '=', auth()->id())
+            ->filter(request(['search', 'category', 'orderBy']))
+            ->get();
+
+        $categories = Category::whereHas('products', function ($query) {
+            $query->where('user_id', '=', auth()->id());
+        })->get();
 
         return view('dashboard.index', [
-            'products' => Product::where('user_id', '=', auth()->id())
-                ->filter(request(['search', 'category', 'orderBy']))
-                ->get(),
+            'products' => $products,
             'categories' => $categories
         ]);
     }

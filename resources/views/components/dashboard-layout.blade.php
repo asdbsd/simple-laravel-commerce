@@ -1,7 +1,7 @@
-@props(['add' => false, 'all' => false])
+@props(['add' => false, 'all' => false, 'favorites' => false])
 <x-layout title="Login" cssPath="/css/auth.css">
-    <main class="d-flex flex-nowrap">
-        <x-header.side-navigation :add="$add" :all="$all"/>
+    <main class="d-flex">
+        <x-header.side-navigation :add="$add" :all="$all" :favorites="$favorites"/>
 
         {{ $slot }}
 

@@ -1,5 +1,4 @@
-<x-dashboard-layout :all="true">
-
+<x-dashboard-layout :favorites="true">
     <div class="row w-100">
         <x-products.filters :categories="$categories"/>
         @if (count($products))
@@ -9,16 +8,12 @@
                 </div>
             @endforeach
         @else
-        <div class="col text-center">
-            <p class="lead">
-                You have not created any products yet.
-            </p>
-            <a href="/dashboard/add-product" class="btn btn-success">Add Product</a>
-        </div>
-
-
+            <div class="col text-center">
+                <p class="lead">
+                    There don't have any favorites yet...
+                </p>
+                <a href="/store" class="btn btn-success">Go to store</a>
+            </div>
         @endif
-
     </div>
-
 </x-dashboard-layout>

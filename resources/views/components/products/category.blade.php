@@ -7,4 +7,4 @@
 {{ '/store/?category=' . $category->slug }}
 @endif
 ">
-<span class="badge text-bg-info">{{ $category->name }}</span></a>
+<strong>Category: </strong><span class="badge text-bg-info">{{ $category->name }}</span></a>

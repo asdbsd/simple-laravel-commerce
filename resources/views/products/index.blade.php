@@ -1,13 +1,12 @@
 <x-layout title="Products Store">
     <x-header.navigation />
-    <main>
-
-        <x-products.filters :categories="$categories"/>
-
+    <x-products.filters :categories="$categories"/>
+    <main class="d-flex">
+       
         <div class="row">
             @if (count($products))
                 @foreach ($products as $product)
-                    <div class="col-4">
+                    <div class="col-3">
                         <x-products.box :product="$product" />
                     </div>
                 @endforeach

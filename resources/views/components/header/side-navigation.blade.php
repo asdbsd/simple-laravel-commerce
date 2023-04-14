@@ -1,4 +1,4 @@
-@props([ 'add' => false, 'all' => false ])
+@props([ 'add', 'all', 'favorites'])
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="home" viewBox="0 0 16 16">
         <path
@@ -73,7 +73,7 @@
 </svg>
 
 
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light me-2" style="width: 280px;">
+<div class="flex-column flex-shrink-0 p-3 bg-light me-2" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -115,7 +115,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark">
+            <a href="/dashboard/favorites" class="nav-link @if($favorites) active @else link-dark @endif" >
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#table" />
                 </svg>

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Contracts\Favorable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,25 +19,28 @@ class Product extends Model
             ->when(
                 $filters['search'] ?? false,
                 fn ($query, $search) =>
-                    $query->where(fn ($query) =>
-                        $query
-                            ->where('name', 'like', '%' . $search . '%')
-                            ->orWhere('description', 'like', '%' . $search . '%')
-                            ->orWhereHas('category', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))    
-                    )
+                $query->where(
+                    fn ($query) =>
+                    $query
+                        ->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('description', 'like', '%' . $search . '%')
+                        ->orWhereHas('category', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))
+                )
             );
 
         $query
             ->when(
                 $filters['category'] ?? false,
                 fn ($query, $category) =>
-                    $query->whereHas('category', fn ($query) => $query->where('slug', $category))
+                $query->whereHas('category', fn ($query) => $query->where('slug', $category))
             );
 
 
         $query
-            ->when($filters['orderBy'] ?? false,
-                fn ($query, $order) => $query->orderBy('name', $order));
+            ->when(
+                $filters['orderBy'] ?? false,
+                fn ($query, $order) => $query->orderBy('name', $order)
+            );
     }
 
     public function getRouteKeyName()
@@ -57,7 +59,7 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function favorites() 
+    public function favorites()
     {
         return $this->morphMany(Favorite::class, 'favorited');
     }
@@ -65,9 +67,20 @@ class Product extends Model
     public function favorite(String $userId)
     {
         $attributes = ['user_id' => $userId];
-        if(! $this->favorites()->where($attributes)->exists()) {
+        if (!$this->favorites()->where($attributes)->exists()) {
             return $this->favorites()->create($attributes);
         }
+    }
 
+    public function removeFavorite()
+    {
+        $favorite = $this->favorites()
+            ->where('favorited_id', '=', $this->id)
+            ->delete();
+    }
+
+    public function isFavorited()
+    {
+        return $this->favorites()->where(['user_id' => auth()->id()])->exists();
     }
 }

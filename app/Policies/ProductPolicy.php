@@ -48,6 +48,15 @@ class ProductPolicy
         return $user->id === $product->user_id;
     }
 
+
+    public function addFavorite(User $user, Product $product) {
+        return $user->id !== $product->user_id;
+    }
+
+    public function removeFavorite(User $user, Product $product) {
+        return $user->id !== $product->user_id;
+    }
+
     /**
      * Determine whether the user can restore the model.
      */
