@@ -1,18 +1,35 @@
 <x-layout title="Checkout Page" cssPath="/css/checkout.css">
     <x-header.navigation />
-    <form id="payment-form">
-        <div id="link-authentication-element">
-            <!--Stripe.js injects the Link Authentication Element-->
+
+    <div class="row">
+        <div class="col-4 text-center">
+
+            <h2>{{ $product->name }}</h2>
+            <span>Price: </span><strong>£{{ $product->price }}</strong>
+            <hr>
+            <img class="col-6 rounded-2 m-0 p-0" src="{{ asset('storage/' . $product->image) }}"
+            alt="{{ $product->slug . '-image' }}" />
         </div>
-        <div id="payment-element">
-            <!--Stripe.js injects the Payment Element-->
+
+        <div class="col-8">
+            <form id="payment-form">
+                <div id="link-authentication-element">
+                    <!--Stripe.js injects the Link Authentication Element-->
+                </div>
+                <div id="payment-element">
+                    <!--Stripe.js injects the Payment Element-->
+                </div>
+                <button id="submit">
+                    <div class="spinner hidden" id="spinner"></div>
+                    <span id="button-text">Pay now</span>
+                </button>
+                <div id="payment-message" class="hidden"></div>
+            </form>
         </div>
-        <button id="submit">
-            <div class="spinner hidden" id="spinner"></div>
-            <span id="button-text">Pay now</span>
-        </button>
-        <div id="payment-message" class="hidden"></div>
-    </form>
+    </div>
+
+
+
 </x-layout>
 
 <script defer>
@@ -23,7 +40,7 @@
 
     // The items the customer wants to buy
     const items = [{
-        id: "xl-tshirt"
+        id: 'prod_Ni8RAhwzjh93Xf'
     }];
 
     let elements;
@@ -38,6 +55,7 @@
     let emailAddress = '';
     // Fetches a payment intent and captures the client secret
     async function initialize() {
+            
         const purchasePath = location.origin + location.pathname + location.search;
         const {
             clientSecret
@@ -50,9 +68,7 @@
             body: JSON.stringify({
                 items
             }),
-        }).then((r) => r.json())
-            .then(console.log)
-            .catch(e => console.log(e))
+        }).then((r) => r.json());
             
 
         elements = stripe.elements({

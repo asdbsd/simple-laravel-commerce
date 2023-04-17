@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -40,6 +41,19 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456')
         ]);
 
+        $cart1 = Cart::factory()->create([
+            'user_id' => $user1->id
+        ]);
+
+        $cart2 = Cart::factory()->create([
+            'user_id' => $user2->id
+        ]);
+
+        $cart3 = Cart::factory()->create([
+            'user_id' => $user3->id
+        ]);
+
+
         $category1 = Category::factory()->create([
             'name' => 'Test'
         ]);
@@ -48,13 +62,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Another Test'
         ]);
 
+        $products1 = Product::factory(5)
+            ->create([
+                'user_id' => $user2->id,
+                'category_id' => Category::factory()
+            ]);
 
-        Product::factory(5)->create([
-            'user_id' => $user2->id,
-            'category_id' => Category::factory()
-        ]);
 
-        Product::factory(2)->create([
+        $products2 = Product::factory(2)->create([
             'user_id' => $user1->id,
             'category_id' => $category2->id
         ]);
@@ -65,6 +80,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        foreach ($products1 as $product) {
+            $cart1->products()->attach($product->id);
+        }
 
+        foreach ($products2 as $product) {
+            $cart3->products()->attach($product->id);
+        }
     }
 }

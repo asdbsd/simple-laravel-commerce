@@ -44,13 +44,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/dashboard/{product}', [DashboardProductController::class, 'destroy']);
 
     // Product favorites routes
-
     Route::get('/dashboard/favorites', [FavoritesController::class, 'index']);
     Route::post('/store/{product}/favorites', [FavoritesController::class, 'store'])->middleware('can:addFavorite,product');
     Route::delete('/store/{product}/favorites', [FavoritesController::class, 'destroy'])->middleware('can:removeFavorite,product');
 
+    // Product purchase routes
     Route::get('/store/{product}/purchase', [PurchaseController::class, 'index']);
     Route::post('/store/{product}/purchase', [PurchaseController::class, 'create']);
+
+    // User Cart manage routes
+    Route::get('/store/{cart}', [CartsController::class, 'show']);
+    Route::post('/store/{cart}/add-product', [CartsController::class, 'store']);
+    Route::patch('/store/{cart}/update-product/{product}', [CartsController::class, 'update']);
+    Route::delete('/store/{cart}/{product}', [CartsController::class, 'destroy']);
 
 });
 

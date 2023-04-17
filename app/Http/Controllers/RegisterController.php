@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -25,7 +26,8 @@ class RegisterController extends Controller
 
         $attributes['password'] = bcrypt($attributes['password']);
 
-        User::create($attributes);
+        $user = User::create($attributes);
+        Cart::create(['user-id' => $user->id]);
 
         return redirect('/');
     }
