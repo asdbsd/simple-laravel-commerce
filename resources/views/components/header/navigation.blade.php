@@ -22,7 +22,7 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
-            <a class="text-dark text-decoration-none" href="/store">Store</a>
+            <a class="text-dark text-decoration-none me-2" href="/store">Store</a>
             @auth
                 <x-header.cart />
                 <x-header.dropdown />

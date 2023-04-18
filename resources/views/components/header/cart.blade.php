@@ -1,4 +1,4 @@
-<a href="/cart/{{ auth()->user()->cart->id }}" type="button" class="btn btn-outline-primary border-0 rounded-4 mx-1">
+<a href="/cart/{{ auth()->user()->cart->id }}" type="button" class="btn btn-outline-primary border-0 rounded-4">
     {{-- @if (auth()->user()->cart->products->count()) --}}
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart"
         viewBox="0 0 16 16">
