@@ -14,6 +14,12 @@
 
 </head>
 
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
 <body>
     <div class="container py-3">
         {{ $slot }}

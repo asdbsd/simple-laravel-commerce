@@ -2,30 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Cart;
 use Error;
 
 class PurchaseController extends Controller
 {
-    public function index(Product $product) {
+    public function index(Cart $cart) {
+
         return view('purchase.index', [
-            'product' => $product
+            'cart' => $cart
+        ]);
+    }
+
+    public function show(Cart $cart) {
+
+        $intentSecret = request('payment_intent_client_secret');
+        $status = request('redirect_status');
+        $products = $cart->products()->get();
+        $cartTotal = $cart->totalPrice;
+
+        foreach($cart->products as $product){
+            $cart->products()->detach($product);
+        }
+        $cart->totalPrice = 0.00;
+        $cart->save();
+
+        return view('purchase.show', [
+            'products' => $products,
+            'cartTotal' => $cartTotal
         ]);
     }
 
     public function create()
     {
-
+        
         // $products = Product::where('slug', '=', request()['items']);
         
         $stripe = \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         function calculateOrderAmount($products): int {
-            // $product = Product::where('slug', '=', $products[0]->slug)->get();
             // Replace this constant with a calculation of the order's amount
             // Calculate the order total on the server to prevent
             // people from directly manipulating the amount on the client
-            return 30;
+
+            return $products[0];
         }
         
         try {
@@ -33,7 +53,6 @@ class PurchaseController extends Controller
             $jsonStr = file_get_contents('php://input');
             $jsonObj = json_decode($jsonStr);
 
-        
             // Create a PaymentIntent with amount and currency
             $paymentIntent = \Stripe\PaymentIntent::create([
                 'amount' => calculateOrderAmount($jsonObj->items),
@@ -47,9 +66,9 @@ class PurchaseController extends Controller
                 'clientSecret' => $paymentIntent->client_secret,
             ];
 
-            // return response()->json($output);
+            return response()->json($output);
 
-            echo json_encode($output);
+            // echo json_encode($output);
         } catch (Error $e) {
             http_response_code(500);
             echo json_encode(['error' => $e->getMessage()]);

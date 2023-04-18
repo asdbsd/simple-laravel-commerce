@@ -26,11 +26,13 @@
                 @if (!$product->isFavorited())
                     <div class="row">
                         <div class="col-5">
-                            <form action="/store/{{ $product->slug }}/purchase">
-                                @csrf
+                            @auth
+                                <form action="/cart/{{ auth()->user()->cart->id }}/add/{{ $product->slug }}" method="POST">
+                                    @csrf
 
-                                <button type="submit" class="btn btn-sm btn-outline-success">Buy Now</button>
-                            </form>
+                                    <button type="submit" class="btn btn-sm btn-outline-success">Add to Cart</button>
+                                </form>
+                            @endauth
                         </div>
                         <div class="col-7">
                             <form method="POST" action="/store/{{ $product->slug }}/favorites">
@@ -48,11 +50,13 @@
                     <div class="row">
                         <div class="btn-group">
                             <div class="col-5">
-                                <form action="/store/{{ $product->slug }}/purchase">
+                                @auth
+                                <form action="/cart/{{ auth()->user()->cart->id }}/add/{{ $product->slug }}" method="POST">
                                     @csrf
 
-                                    <button type="submit" class="btn btn-sm btn-outline-success">Buy Now</button>
+                                    <button type="submit" class="btn btn-sm btn-outline-success">Add to Cart</button>
                                 </form>
+                                @endauth
                             </div>
                             <div class="col-7">
                                 <form method="POST" action="/store/{{ $product->slug }}/favorites">

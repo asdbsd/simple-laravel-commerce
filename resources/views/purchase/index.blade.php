@@ -2,16 +2,31 @@
     <x-header.navigation />
 
     <div class="row">
-        <div class="col-4 text-center">
+        <div class="col-6">
+            @foreach ($cart->products()->get() as $product)
+                <div class="row">
+                    <div class="col-4">
+                        <img class="col-12 rounded-2 m-0 p-0" src="{{ asset('storage/' . $product->image) }}"
+                            alt="{{ $product->slug . '-image' }}" />
+                    </div>
 
-            <h2>{{ $product->name }}</h2>
-            <span>Price: </span><strong>£{{ $product->price }}</strong>
-            <hr>
-            <img class="col-6 rounded-2 m-0 p-0" src="{{ asset('storage/' . $product->image) }}"
-            alt="{{ $product->slug . '-image' }}" />
+                    <div class="col-8">
+                        <h2>{{ $product->name }}</h2>
+                        <p><span>Price: </span><strong>£{{ $product->price }}</strong></p>
+                        <p></p><span>Qty: </span><strong>{{ $product->pivot->count }}</strong></p>
+                    </div>
+
+                </div>
+                <hr>
+            @endforeach
         </div>
 
-        <div class="col-8">
+        <div class="col-6">
+            <div id="total-price" data-amount="{{ $cart->totalPrice * 100}}">
+                <span>Total Amount:</span>
+                <span><strong>£{{ number_format($cart->totalPrice, 2, '.', ',') }}</strong></span>
+            </div>
+            <br>
             <form id="payment-form">
                 <div id="link-authentication-element">
                     <!--Stripe.js injects the Link Authentication Element-->
@@ -25,10 +40,9 @@
                 </button>
                 <div id="payment-message" class="hidden"></div>
             </form>
+
         </div>
     </div>
-
-
 
 </x-layout>
 
@@ -36,12 +50,11 @@
     // This is your test publishable API key.
     const stripe = Stripe(
         "pk_test_51Mwi7DBQHcCtp6BWhGMNja1TcffxjtG2Ps1vlzyET17lGwgwY29gPvv9EhDe7SUIKtU0grMDHs9fFoL8Dvy4ILvK00klitnct1"
-        );
+    );
 
     // The items the customer wants to buy
-    const items = [{
-        id: 'prod_Ni8RAhwzjh93Xf'
-    }];
+
+    const items = [ document.querySelector('#total-price').dataset.amount ];
 
     let elements;
 
@@ -55,7 +68,6 @@
     let emailAddress = '';
     // Fetches a payment intent and captures the client secret
     async function initialize() {
-            
         const purchasePath = location.origin + location.pathname + location.search;
         const {
             clientSecret
@@ -69,7 +81,7 @@
                 items
             }),
         }).then((r) => r.json());
-            
+
 
         elements = stripe.elements({
             clientSecret
@@ -96,7 +108,7 @@
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "http://localhost:4242/checkout.html",
+                return_url: `http://localhost/purchase/${location.pathname.split('/')[2]}/complete`,
                 receipt_email: emailAddress,
             },
         });

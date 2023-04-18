@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartsController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -36,6 +37,7 @@ Route::get('/store', [ProductsController::class, 'index'])->name('store');
 Route::get('/store/{product}', [ProductsController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/dashboard/my-products', [DashboardProductController::class, 'index']);
     Route::get('/dashboard/add-product', [DashboardProductController::class, 'create']);
     Route::post('/dashboard/add-product', [DashboardProductController::class, 'store']);
@@ -49,18 +51,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/store/{product}/favorites', [FavoritesController::class, 'destroy'])->middleware('can:removeFavorite,product');
 
     // Product purchase routes
-    Route::get('/store/{product}/purchase', [PurchaseController::class, 'index']);
-    Route::post('/store/{product}/purchase', [PurchaseController::class, 'create']);
+
+    Route::get('/purchase/{cart}', [PurchaseController::class, 'index'])->name('store.purchase');
+    Route::get('/purchase/{cart}/complete', [PurchaseController::class, 'show']);
+    Route::post('/purchase/{cart}', [PurchaseController::class, 'create']);
+
 
     // User Cart manage routes
-    Route::get('/store/{cart}', [CartsController::class, 'show']);
-    Route::post('/store/{cart}/add-product', [CartsController::class, 'store']);
-    Route::patch('/store/{cart}/update-product/{product}', [CartsController::class, 'update']);
-    Route::delete('/store/{cart}/{product}', [CartsController::class, 'destroy']);
-
+    Route::get('/cart/{cart}', [CartsController::class, 'show']);
+    Route::post('/cart/{cart}/add/{product}', [CartsController::class, 'store']);
+    Route::patch('/cart/{cart}/update/{product}/{action}', [CartsController::class, 'update']);
+    Route::delete('/cart/{cart}/{product}', [CartsController::class, 'destroy']);
 });
 
 // Dashboard Product routes
-
 
 // Route::fallback(fn() => redirect('/store'));

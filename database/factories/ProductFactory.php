@@ -21,7 +21,7 @@ class ProductFactory extends Factory
         $data = [
             'name' => fake()->name(),
             'description' => fake()->text(),
-            'price' => fake()->randomFloat(2, 0.50, 999999.99),
+            'price' => fake()->randomFloat(2, 0.50, 52000.99),
             'image' => $this->getRandomImage()['arr'][$this->getRandomImage()['number']],
             'user_id' => User::factory()
         ];

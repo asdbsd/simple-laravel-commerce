@@ -22,12 +22,14 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/store">Store</a>
+            <a class="text-dark text-decoration-none" href="/store">Store</a>
             @auth
+                <x-header.cart />
                 <x-header.dropdown />
             @else
                 <a href="/login" class="btn btn-sm btn-outline-primary rounded-2 me-1">Login</a>
                 <a href="/register" class="btn btn-sm btn-success rounded-2">Register</a>
+
             @endauth
 
         </nav>
