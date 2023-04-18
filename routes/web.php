@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 
     // User Cart manage routes
     Route::get('/cart/{cart}', [CartsController::class, 'show']);
-    Route::post('/cart/{cart}/add/{product}', [CartsController::class, 'store']);
+    Route::post('/cart/{cart}/add/{product}', [CartsController::class, 'store'])->middleware('can:addProduct,cart,product');
     Route::patch('/cart/{cart}/update/{product}/{action}', [CartsController::class, 'update']);
     Route::delete('/cart/{cart}/{product}', [CartsController::class, 'destroy']);
 });

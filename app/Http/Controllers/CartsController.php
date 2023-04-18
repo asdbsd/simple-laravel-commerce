@@ -10,7 +10,8 @@ class CartsController extends Controller
 {
     public function show(Cart $cart)
     {
-        
+        $this->authorize('view', $cart);
+
         return view('cart.show', [
             'cart' => $cart,
             'totalPrice' => $cart->totalPrice

@@ -6,7 +6,6 @@
 
     <div class="row my-2 mx-1">
         <div class="col-12">
-
             @canany(['update', 'destroy'], $product)
                 <form method="POST" action="/dashboard/{{ $product->slug }}" class="text-end">
                     @csrf
