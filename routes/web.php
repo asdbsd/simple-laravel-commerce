@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
 
     // Product purchase routes
 
-    Route::get('/purchase/{cart}', [PurchaseController::class, 'index'])->name('store.purchase');
+    Route::get('/purchase/{cart}', [PurchaseController::class, 'index'])->name('store.purchase')->middleware('can:canAccessPurchaseIndex,cart');
     Route::get('/purchase/{cart}/complete', [PurchaseController::class, 'show']);
     Route::post('/purchase/{cart}', [PurchaseController::class, 'create']);
 

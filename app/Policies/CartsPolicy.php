@@ -29,4 +29,9 @@ class CartsPolicy
     {
         return $user->id === $cart->user_id;
     }
+
+    public function canAccessPurchaseIndex(User $user, Cart $cart): bool
+    {
+        return $user->id === $cart->user_id;
+    }
 }
