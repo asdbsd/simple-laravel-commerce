@@ -4,8 +4,8 @@
 <div class="card shadow-sm my-1">
     <x-products.link :product="$product" />
 
-    <div class="row py-2 px-1">
-        
+    <div class="row py-2 mx-1">
+
         @canany(['update', 'destroy'], $product)
             <form method="POST" action="/dashboard/{{ $product->slug }}">
                 @csrf
@@ -36,7 +36,7 @@
                     <form method="POST" action="/store/{{ $product->slug }}/favorites">
                         @csrf
 
-                        <button type="submit" class="btn btn-sm btn-info">Favorite</button>
+                        <button type="submit" class="btn btn-sm btn-outline-info">Favorite</button>
                     </form>
                 @else
                     <form method="POST" action="/store/{{ $product->slug }}/favorites">
