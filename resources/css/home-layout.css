@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     padding: 10px 10px; 
 
@@ -12,7 +16,7 @@ main {
     text-decoration: none;
 }
 .product-header {
-    background-image: url('../../storage/images/header-image.jpg');
+    background-image: url('../../storage/app/public/images/header-image.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;

@@ -1,3 +1,6 @@
+@push('head')
+    @vite('resources/css/auth.css')
+@endpush
 <x-layout title="Register" cssPath="/css/auth.css">
     <x-header.navigation />
     <main class="form-signin w-100 m-auto text-center">

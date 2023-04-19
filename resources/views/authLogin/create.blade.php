@@ -1,4 +1,7 @@
-<x-layout title="Login" cssPath="/css/auth.css">
+@push('head')
+    @vite('resources/css/auth.css')
+@endpush
+<x-layout title="Login">
     <x-header.navigation />
     <main class="form-signin w-100 m-auto text-center">
         <form method="POST" action="/login">

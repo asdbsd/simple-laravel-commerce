@@ -9,16 +9,10 @@
     <title>LaraCommerce | {{ $title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ $cssPath }}">
     <script src="https://js.stripe.com/v3/"></script>
-
+    @vite('resources/css/home-layout.css')
+    @stack('head')
 </head>
-
-<style>
-    html {
-        scroll-behavior: smooth;
-    }
-</style>
 
 <body>
     <div class="container py-3">

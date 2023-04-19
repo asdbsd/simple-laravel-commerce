@@ -1,3 +1,7 @@
+
+@push('head')
+    @vite('resources/js/add-product.js')
+@endpush
 <x-dashboard-layout :add="true">
     <div class="col-md-7 col-lg-8 ms-3">
         <h4 class="mb-3">Add Product</h4>
@@ -59,38 +63,3 @@
         </form>
     </div>
 </x-dashboard-layout>
-
-
-<script>
-    const handlePriceInputChange = (event) => {
-        const priceInputElement = event.target;
-
-        if (priceInputElement.value < 0.5) {
-            priceInputElement.value = 0;
-            return;
-        }
-
-        while (priceInputElement.value[0] == '0' && priceInputElement.value[1] !== '.') {
-            priceInputElement.value = priceInputElement.value.slice(1);
-        }
-
-        let [charsBeforeDot, charsAfterDot] = [...priceInputElement.value.split('.')];
-
-
-
-        if (!charsAfterDot) {
-            charsAfterDot = '00';
-        } else if (charsAfterDot.length < 2) {
-            charsAfterDot += '0'
-        } else if (charsAfterDot.length > 2) {
-            charsAfterDot = charsAfterDot.slice(0, 2);
-        }
-
-        if (charsBeforeDot > 5) {
-            priceInputElement.value = [charsBeforeDot.slice(0, 6), charsAfterDot].join('.');
-        }
-
-    }
-
-    document.querySelector('#priceInput').addEventListener('change', handlePriceInputChange);
-</script>

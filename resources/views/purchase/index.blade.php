@@ -1,4 +1,9 @@
-<x-layout title="Checkout Page" cssPath="/css/checkout.css">
+
+
+@push('head')
+    @vite('resources/css/checkout.css')
+@endpush
+<x-layout title="Checkout Page">
     <x-header.navigation />
 
     <div class="row">
