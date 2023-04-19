@@ -13,56 +13,53 @@
             <p>
                 {{ $product->description }}
             </p>
-            @canany(['update', 'destroy'], $product)
-                <form action="/dashboard/{{ $product->slug }}">
-                    @csrf
-                    @method('DELETE')
+            <div class="row py-2 mx-1">
 
-                    <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary"
-                        type="button">Edit</a>
-                    <button type="submit" class="btn btn-sm btn-outline-danger" type="button">Delete</button>
-
-                </form>
-            @else
-                <p><small>Price: </small><strong class="pricing-card-title">£{{ $product->price }}</strong></p>
-
-                @if (!$product->isFavorited())
-                    <div class="row">
-                        <div class="col-5">
-                            <form action="/store/{{ $product->slug }}/purchase" method="GET">
-                                @csrf
-
-                                <button class="btn btn-sm btn-outline-success" type="submit">Buy Now</button>
-                            </form>
+                @canany(['update', 'destroy'], $product)
+                    <form method="POST" action="/dashboard/{{ $product->slug }}">
+                        @csrf
+                        @method('DELETE')
+        
+                        <div class="btn-group ms-1">
+                            <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary"
+                                type="button">Edit</a>
+        
+        
+                            <button type="submit" class="btn btn-sm btn-outline-danger" type="button">Delete</button>
+        
                         </div>
-                        <div class="col-7">
-                            <form method="POST" action="/store/{{ $product->slug }}/favorites">
-                                @csrf
-                                
-                                <button type="submit" class="btn btn-sm btn-info">Favorite</button>
-                            </form>
-                        </div>
-                    </div>
+        
+                    </form>
                 @else
-                    <div class="row">
-                        <div class="col-5">
-                            <form action="/store/{{ $product->slug }}/purchase" method="GET">
-                                @csrf
-                                <button class="btn btn-sm btn-outline-success" type="submit">Buy Now</button>
-                            </form>
-                        </div>
-                        <div class="col-7">
+                    <div class="d-flex">
+        
+                        <form action="/cart/{{ auth()->user() ? auth()->user()->cart->id : mt_rand(1, 100) }}/add/{{ $product->slug }}"
+                            method="POST" class="mx-1">
+                            @csrf
+        
+                            <button type="submit" class="btn btn-sm btn-outline-success">Add to Cart</button>
+                        </form>
+        
+        
+                        @if (!$product->isFavorited())
                             <form method="POST" action="/store/{{ $product->slug }}/favorites">
                                 @csrf
-                                @method('DELETE').
-
+        
+                                <button type="submit" class="btn btn-sm btn-outline-info">Favorite</button>
+                            </form>
+                        @else
+                            <form method="POST" action="/store/{{ $product->slug }}/favorites">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger">Remove Favorite</button>
                             </form>
-                        </div>
+                        @endif
                     </div>
-                @endif
-            @endcanany
-
+        
+                @endcanany
+        
+        
+            </div>
         </div>
 
     </div>

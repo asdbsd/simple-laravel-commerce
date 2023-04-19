@@ -1,7 +1,7 @@
 @props(['product'])
 
 
-<div class="card shadow-sm my-1">
+<div class="card shadow-sm m-1">
     <x-products.link :product="$product" />
 
     <div class="row py-2 mx-1">
