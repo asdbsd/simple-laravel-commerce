@@ -1,3 +1,6 @@
+@push('head')
+    @vite('resources/css/auth.css')
+@endpush
 @props(['add' => false, 'all' => false, 'favorites' => false])
 <x-layout title="Login">
     <main class="d-flex">

@@ -75,7 +75,7 @@
 
 <div class="flex-column flex-shrink-0 p-3 bg-light me-2" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <a href="{{ route('index') }}" class="d-flex align-items-center text-dark text-decoration-none">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                 width="40" height="32" viewBox="0 0 256 256" xml:space="preserve">
 
@@ -99,7 +99,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="/store" class="nav-link link-dark" aria-current="page">
+            <a href="{{ route('products.index') }}" class="nav-link link-dark" aria-current="page">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#home" />
                 </svg>
@@ -107,7 +107,7 @@
             </a>
         </li>
         <li>
-            <a href="/dashboard/my-products" class="nav-link @if($all) active @else link-dark @endif">
+            <a href="{{ route('dashboard.index') }}" class="nav-link @if($all) active @else link-dark @endif">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#grid" />
                 </svg>
@@ -115,7 +115,7 @@
             </a>
         </li>
         <li>
-            <a href="/dashboard/favorites" class="nav-link @if($favorites) active @else link-dark @endif" >
+            <a href="{{ route('dashboard.favorites.index') }}" class="nav-link @if($favorites) active @else link-dark @endif" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                     <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                   </svg>
@@ -132,18 +132,10 @@
                 Shopping Cart
             </a>
         </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#people-circle" />
-                </svg>
-                Profile
-            </a>
-        </li>
         <hr>
 
         <li>
-            <a href="/dashboard/add-product" class="nav-link @if($add) active @else link-dark @endif">
+            <a href="{{ route('dashboard.create') }}" class="nav-link @if($add) active @else link-dark @endif">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
                     height="16px" width="16px" version="1.1" id="Capa_1" viewBox="0 0 591.6 591.6"
                     xml:space="preserve">

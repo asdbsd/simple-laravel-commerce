@@ -1,6 +1,6 @@
 @props(['product'])
 
-<a href="/store/{{ $product->slug }}">
+<a href="{{ route('products.show', $product) }}">
     <img src="{{ asset('storage/' . $product->image) }}" alt="Card Image" width="100%" height="225">
 
     <div class="card-body">

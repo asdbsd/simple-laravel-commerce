@@ -21,49 +21,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-
-
-
-// Authentication Routes
-Route::get('/login', [LoginController::class, 'create'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'store'])->middleware('guest');
-Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
-Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+// Home page route
+Route::resource('/', HomeController::class)
+    ->only(['index']);
 
 // Products index and show routes
-Route::get('/store', [ProductsController::class, 'index'])->name('store');
-Route::get('/store/{product}', [ProductsController::class, 'show']);
+Route::resource('products', ProductsController::class)
+    ->only(['index', 'show']);
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard/my-products', [DashboardProductController::class, 'index']);
-    Route::get('/dashboard/add-product', [DashboardProductController::class, 'create']);
-    Route::post('/dashboard/add-product', [DashboardProductController::class, 'store']);
-    Route::get('/dashboard/edit-product/{product}', [DashboardProductController::class, 'edit']);
-    Route::patch('/dashboard/edit-product/{product}', [DashboardProductController::class, 'update']);
-    Route::delete('/dashboard/{product}', [DashboardProductController::class, 'destroy']);
+    Route::resource('dashboard', DashboardProductController::class)
+        ->parameters(['dashboard' => 'product'])
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-    // Product favorites routes
-    Route::get('/dashboard/favorites', [FavoritesController::class, 'index']);
-    Route::post('/store/{product}/favorites', [FavoritesController::class, 'store'])->middleware('can:addFavorite,product');
-    Route::delete('/store/{product}/favorites', [FavoritesController::class, 'destroy'])->middleware('can:removeFavorite,product');
-
-    // Product purchase routes
-
-    Route::get('/purchase/{cart}', [PurchaseController::class, 'index'])->name('store.purchase')->middleware('can:canAccessPurchaseIndex,cart');
-    Route::get('/purchase/{cart}/complete', [PurchaseController::class, 'show']);
-    Route::post('/purchase/{cart}', [PurchaseController::class, 'create']);
-
+    Route::get('dashboard/favorites', [FavoritesController::class, 'index'])->name('dashboard.favorites.index');
+    Route::post('dashboard/favorites/{product}', [FavoritesController::class, 'store'])->middleware('can:canManageFavorite,product')->name('dashboard.favorites.store');
+    Route::delete('dashboard/favorites/{product}', [FavoritesController::class, 'destroy'])->middleware('can:canManageFavorite,product')->name('dashboard.favorites.destroy');
 
     // User Cart manage routes
-    Route::get('/cart/{cart}', [CartsController::class, 'show']);
-    Route::post('/cart/{cart}/add/{product}', [CartsController::class, 'store'])->middleware('can:addProduct,cart,product');
-    Route::patch('/cart/{cart}/update/{product}/{action}', [CartsController::class, 'update'])->middleware('can:updateProduct,cart,product');
-    Route::delete('/cart/{cart}/{product}', [CartsController::class, 'destroy'])->middleware('can:destroyProduct,cart,product');
+    Route::get('/cart/{cart}', [CartsController::class, 'show'])->name('cart.index');
+    Route::post('/cart/{cart}/{product}', [CartsController::class, 'store'])->middleware('can:canManageCart,cart,product')->name('cart.store');
+    Route::patch('/cart/{cart}/{product}/{action}', [CartsController::class, 'update'])->middleware('can:canManageCart,cart,product')->name('cart.update');
+    Route::delete('/cart/{cart}/{product}', [CartsController::class, 'destroy'])->middleware('can:canManageCart,cart,product')->name('cart.destroy');
+
+    // Product purchase routes
+    Route::get('/purchase/{cart}', [PurchaseController::class, 'index'])->middleware('can:canAccessPurchase,cart')->name('purchase.index');
+    Route::post('/purchase/{cart}', [PurchaseController::class, 'create'])->name('purchase.create');
+    Route::get('/purchase/{cart}/complete', [PurchaseController::class, 'show'])->middleware('can:canAccessPurchase,cart')->name('purchase.complete');
 });
 
-// Dashboard Product routes
+
+Route::middleware('guest')->group(function () {
+    // Authentication Routes
+    Route::resource('login', LoginController::class)->only([
+        'create', 'store'
+    ]);
+
+    Route::resource('register', RegisterController::class)->only([
+        'create', 'store'
+    ]);
+});
+Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
+
+
 
 // Route::fallback(fn() => redirect('/store'));

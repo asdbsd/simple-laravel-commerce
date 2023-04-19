@@ -1,4 +1,4 @@
-@props(['title', 'cssPath' => '/css/home-layout.css'])
+@props(['title'])
 
 <!DOCTYPE html>
 <html lang="en">

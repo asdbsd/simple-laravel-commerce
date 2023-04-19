@@ -7,12 +7,12 @@
     <div class="row py-2 mx-1">
 
         @canany(['update', 'destroy'], $product)
-            <form method="POST" action="/dashboard/{{ $product->slug }}">
+            <form method="POST" action="{{ route('dashboard.destroy', $product) }}">
                 @csrf
                 @method('DELETE')
 
                 <div class="btn-group ms-1">
-                    <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary"
+                    <a href="{{ route('dashboard.edit', $product) }}" class="btn btn-sm btn-outline-primary"
                         type="button">Edit</a>
 
 
@@ -23,8 +23,8 @@
             </form>
         @else
             <div class="d-flex">
-
-                <form action="/cart/{{ auth()->user() ? auth()->user()->cart->id : mt_rand(1, 100) }}/add/{{ $product->slug }}"
+                <form
+                    action="{{ route('cart.store', [auth()->user() ? auth()->user()->cart->id : mt_rand(1, 100), $product]) }}"
                     method="POST" class="mx-1">
                     @csrf
 
@@ -33,15 +33,16 @@
 
 
                 @if (!$product->isFavorited())
-                    <form method="POST" action="/store/{{ $product->slug }}/favorites">
+                    <form method="POST" action="{{ route('dashboard.favorites.store', $product) }}">
                         @csrf
 
                         <button type="submit" class="btn btn-sm btn-outline-info">Favorite</button>
                     </form>
                 @else
-                    <form method="POST" action="/store/{{ $product->slug }}/favorites">
+                    <form method="POST" action="{{ route('dashboard.favorites.destroy', $product) }}">
                         @csrf
                         @method('DELETE')
+                        
                         <button type="submit" class="btn btn-sm btn-outline-danger">Remove Favorite</button>
                     </form>
                 @endif

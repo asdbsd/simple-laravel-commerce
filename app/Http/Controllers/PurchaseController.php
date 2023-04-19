@@ -70,8 +70,7 @@ class PurchaseController extends Controller
 
             // echo json_encode($output);
         } catch (Error $e) {
-            http_response_code(500);
-            echo json_encode(['error' => $e->getMessage()]);
+            abort(500, $e->getMessage());
         }
 
     }

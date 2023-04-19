@@ -45,7 +45,7 @@ class DashboardProductController extends Controller
         $attributes['image'] = request()->file('image')->store('images');
 
         Product::create($attributes);
-        return redirect('/store/' . $attributes['slug']);
+        return redirect(route('products.index', $attributes['slug']));
     }
 
     public function edit(Product $product)
@@ -70,7 +70,7 @@ class DashboardProductController extends Controller
         }
 
         $product->update($attributes);
-        return redirect('/store/' . $product->slug);
+        return redirect(route('products.index', $product));
     }
 
     public function destroy(Product $product)

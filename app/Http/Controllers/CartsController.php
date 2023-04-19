@@ -28,7 +28,7 @@ class CartsController extends Controller
             : $cart->products()->attach($product);
 
         $this->updateCartTotalPrice($cart);
-        return redirect('/cart/' . $cart->id);
+        return redirect(route('cart.index', $cart));
     }
 
     public function update(Cart $cart, Product $product, $action)
@@ -39,7 +39,7 @@ class CartsController extends Controller
         $this->updateCartTotalPrice($cart);
 
             
-        return redirect('/cart/' . $cart->id . '#' . $product->slug);
+        return redirect(route('cart.index', [$cart, $product]));
     }
 
     public function destroy(Cart $cart, Product $product)

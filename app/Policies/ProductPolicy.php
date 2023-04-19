@@ -53,11 +53,7 @@ class ProductPolicy
     }
 
 
-    public function addFavorite(User $user, Product $product) {
-        return $user->id !== $product->user_id;
-    }
-
-    public function removeFavorite(User $user, Product $product) {
+    public function canManageFavorite(User $user, Product $product) {
         return $user->id !== $product->user_id;
     }
 

@@ -4,7 +4,7 @@
 <x-layout title="Login">
     <x-header.navigation />
     <main class="form-signin w-100 m-auto text-center">
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ route('login.store') }}">
             @csrf
 
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="80"

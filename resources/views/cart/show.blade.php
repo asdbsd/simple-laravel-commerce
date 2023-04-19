@@ -20,7 +20,7 @@
                                     <p class="lead fw-normal mb-2">{{ $product->name }}</p>
                                 </div>
                                 <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
-                                    <form action="/cart/{{ $cart->id }}/update/{{ $product->slug }}/down"
+                                    <form action="{{ route('cart.update', [$cart, $product, 'down']) }}"
                                         method="POST">
                                         @csrf
                                         @method('PATCH')
@@ -36,7 +36,7 @@
                                     <input id="form1" min="0" name="quantity"
                                         value="{{ $product->pivot->count }}" @php $totalProducts += $product->pivot->count @endphp type="number"
                                         class="form-control form-control-sm" />
-                                    <form action="/cart/{{ $cart->id }}/update/{{ $product->slug }}/up"
+                                    <form action="{{ route('cart.update', [$cart, $product, 'up']) }}"
                                         method="POST">
                                         @csrf
                                         @method('PATCH')
@@ -54,7 +54,7 @@
                                     <h5 class="mb-0">£{{ number_format($product->price, 2, '.', ',') }}</h5>
                                 </div>
                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                    <form action="/cart/{{ $cart->id }}/{{ $product->slug }}" method="POST">
+                                    <form action="{{ route('cart.destroy', [$cart, $product]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
 
@@ -103,7 +103,7 @@
                         </ul>
 
                         <div class="text-end">
-                            <form action="{{ route('store.purchase', $cart->id) }}" action="GET">
+                            <form action="{{ route('purchase.index', $cart->id) }}" action="GET">
                                 @csrf
 
                                 <button type="submit" class="btn btn-primary btn-md btn-block">
@@ -119,7 +119,7 @@
         @else
             <div class="col-12">
                 <p>There are no products in your shopping cart. Please go to <a class="btn btn-sm btn-primary"
-                        href="/store">STORE</a> to add products
+                        href="{{ route('products.index') }}">STORE</a> to add products
                     in your cart.</p>
             </div>
         @endif

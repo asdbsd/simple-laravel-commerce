@@ -26,12 +26,12 @@ class LoginController extends Controller
 
         session()->regenerate();
 
-        return redirect('/');
+        return redirect(route('products.index'));
     }
 
     public function destroy() {
         auth()->logout();
-        return redirect('/store');
+        return redirect(route('index'));
     }
 
 }

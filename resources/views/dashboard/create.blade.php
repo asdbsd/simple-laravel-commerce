@@ -5,7 +5,7 @@
 <x-dashboard-layout :add="true">
     <div class="col-md-7 col-lg-8 ms-3">
         <h4 class="mb-3">Add Product</h4>
-        <form method="POST" action="/dashboard/add-product" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('dashboard.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="row g-3">

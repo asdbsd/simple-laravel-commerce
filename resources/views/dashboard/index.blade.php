@@ -13,7 +13,7 @@
             <p class="lead">
                 You have not created any products yet.
             </p>
-            <a href="/dashboard/add-product" class="btn btn-success">Add Product</a>
+            <a href="{{ route('dashboard.create') }}" class="btn btn-success">Add Product</a>
         </div>
 
 

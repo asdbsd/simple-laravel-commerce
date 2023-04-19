@@ -22,13 +22,14 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
-            <a class="text-dark text-decoration-none me-2" href="/store">Store</a>
+            <a class="text-dark text-decoration-none me-2" href="{{ route('products.index') }}">Store</a>
             @auth
                 <x-header.cart />
                 <x-header.dropdown />
             @else
-                <a href="/login" class="btn btn-sm btn-outline-primary rounded-2 me-1">Login</a>
-                <a href="/register" class="btn btn-sm btn-success rounded-2">Register</a>
+                <a href="{{ route('login.create') }}" class="btn btn-sm btn-outline-primary rounded-2 me-1">Login</a>
+                <a href="{{ route('register.create') }}" class="btn btn-sm btn-success rounded-2">Register</a>
+                
 
             @endauth
 
