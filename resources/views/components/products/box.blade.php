@@ -1,75 +1,55 @@
 @props(['product'])
 
 
-<div class="card shadow-sm m-1">
+<div class="card shadow-sm my-1">
     <x-products.link :product="$product" />
 
-    <div class="row my-2 mx-1">
-        <div class="col-12">
-            @canany(['update', 'destroy'], $product)
-                <form method="POST" action="/dashboard/{{ $product->slug }}" class="text-end">
+    <div class="row py-2 px-1">
+        
+        @canany(['update', 'destroy'], $product)
+            <form method="POST" action="/dashboard/{{ $product->slug }}">
+                @csrf
+                @method('DELETE')
+
+                <div class="btn-group ms-1">
+                    <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary"
+                        type="button">Edit</a>
+
+
+                    <button type="submit" class="btn btn-sm btn-outline-danger" type="button">Delete</button>
+
+                </div>
+
+            </form>
+        @else
+            <div class="d-flex">
+
+                <form action="/cart/{{ auth()->user() ? auth()->user()->cart->id : mt_rand(1, 100) }}/add/{{ $product->slug }}"
+                    method="POST" class="mx-1">
                     @csrf
-                    @method('DELETE')
 
-                    <div class="btn-group ms-1">
-                        <a href="/dashboard/edit-product/{{ $product->slug }}" class="btn btn-sm btn-outline-primary"
-                            type="button">Edit</a>
-
-
-                        <button type="submit" class="btn btn-sm btn-outline-danger" type="button">Delete</button>
-
-                    </div>
-
+                    <button type="submit" class="btn btn-sm btn-outline-success">Add to Cart</button>
                 </form>
-            @else
+
+
                 @if (!$product->isFavorited())
-                    <div class="row">
-                        <div class="col-5">
-                            @auth
-                                <form action="/cart/{{ auth()->user()->cart->id }}/add/{{ $product->slug }}" method="POST">
-                                    @csrf
+                    <form method="POST" action="/store/{{ $product->slug }}/favorites">
+                        @csrf
 
-                                    <button type="submit" class="btn btn-sm btn-outline-success">Add to Cart</button>
-                                </form>
-                            @endauth
-                        </div>
-                        <div class="col-7">
-                            <form method="POST" action="/store/{{ $product->slug }}/favorites">
-                                @csrf
-
-
-
-                                <button type="submit" class="btn btn-sm btn-info">Favorite</button>
-
-
-                            </form>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-sm btn-info">Favorite</button>
+                    </form>
                 @else
-                    <div class="row">
-                        <div class="btn-group">
-                            <div class="col-5">
-                                @auth
-                                <form action="/cart/{{ auth()->user()->cart->id }}/add/{{ $product->slug }}" method="POST">
-                                    @csrf
-
-                                    <button type="submit" class="btn btn-sm btn-outline-success">Add to Cart</button>
-                                </form>
-                                @endauth
-                            </div>
-                            <div class="col-7">
-                                <form method="POST" action="/store/{{ $product->slug }}/favorites">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">Remove Favorite</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <form method="POST" action="/store/{{ $product->slug }}/favorites">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Remove Favorite</button>
+                    </form>
                 @endif
-            @endcanany
+            </div>
 
-        </div>
+        @endcanany
+
+
     </div>
 
 
